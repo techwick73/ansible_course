@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index for fedora
+    ansible.builtin.dnf:
+      update_cache: yes
+    when: ansible_distribution == "Fedora"
+
+  - name: install httpd package
+    ansible.builtin.dnf:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "Fedora"
+
+  - name: install support for php for fedora
+    ansible.builtin.dnf:
+      name: php
+      state: latest
+    when: ansible_distribution == "Fedora"
